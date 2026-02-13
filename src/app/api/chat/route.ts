@@ -9,6 +9,8 @@ const MAX_MESSAGE_LENGTH = 5000;
 const COMPLETION_START = ":::INTERVIEW_COMPLETE:::";
 const COMPLETION_END = ":::END_DATA:::";
 
+export const maxDuration = 30;
+
 export async function POST(request: Request) {
   try {
     const ip =

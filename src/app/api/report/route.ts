@@ -6,6 +6,8 @@ import { reportRequestSchema } from "@/lib/schemas";
 import { checkRateLimit } from "@/lib/rate-limit";
 import type { HeistReport } from "@/lib/types";
 
+export const maxDuration = 60;
+
 export async function POST(request: Request) {
   try {
     const ip =
