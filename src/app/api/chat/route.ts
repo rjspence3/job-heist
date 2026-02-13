@@ -113,9 +113,12 @@ function parseInterviewResponse(rawReply: string): {
   const jsonString = rawReply.slice(jsonStart, endIndex).trim();
 
   try {
-    const result = interviewDataSchema.safeParse(JSON.parse(jsonString));
+    const raw = JSON.parse(jsonString);
+    const normalized = normalizeInterviewData(raw);
+    const result = interviewDataSchema.safeParse(normalized);
 
     if (!result.success) {
+      console.error("Interview data validation failed:", result.error.issues);
       return {
         cleanReply: rawReply,
         interviewComplete: false,
@@ -135,4 +138,22 @@ function parseInterviewResponse(rawReply: string): {
       extractedData: null,
     };
   }
+}
+
+const FIELD_ALIASES: Record<string, string> = {
+  humanInteraction: "humanInteractions",
+  creativeElement: "creativeElements",
+  painPoint: "painPoints",
+  decisionType: "decisionTypes",
+  toolUsed: "toolsUsed",
+  tool: "toolsUsed",
+  dailyTask: "dailyTasks",
+};
+
+function normalizeInterviewData(raw: Record<string, unknown>): Record<string, unknown> {
+  const normalized: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(raw)) {
+    normalized[FIELD_ALIASES[key] ?? key] = value;
+  }
+  return normalized;
 }
