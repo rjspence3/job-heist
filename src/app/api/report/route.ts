@@ -4,7 +4,6 @@ import { getReportSystemPrompt } from "@/lib/prompts";
 import { validateScores } from "@/lib/scoring";
 import { reportRequestSchema } from "@/lib/schemas";
 import { checkRateLimit } from "@/lib/rate-limit";
-import type { HeistReport } from "@/lib/types";
 
 export const maxDuration = 60;
 
@@ -41,27 +40,9 @@ export async function POST(request: Request) {
     const { interviewData } = parsed.data;
     const systemPrompt = getReportSystemPrompt(interviewData);
 
-    let report: HeistReport;
-    let attemptCount = 0;
-    const maxAttempts = 2;
-
-    while (attemptCount < maxAttempts) {
-      try {
-        report = await generateReport(systemPrompt, interviewData);
-        const validatedReport = validateScores(report);
-        return NextResponse.json(validatedReport);
-      } catch (error) {
-        attemptCount++;
-        if (attemptCount >= maxAttempts) {
-          throw error;
-        }
-      }
-    }
-
-    return NextResponse.json(
-      { error: "Failed to generate valid report" },
-      { status: 500 }
-    );
+    const report = await generateReport(systemPrompt, interviewData);
+    const validatedReport = validateScores(report);
+    return NextResponse.json(validatedReport);
   } catch (error) {
     console.error(
       "Report API error:",

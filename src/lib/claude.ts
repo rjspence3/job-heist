@@ -61,17 +61,20 @@ export async function generateReport(
 
   const userMessage = getReportUserMessage(interviewData);
 
-  const response = await client.messages.create({
-    model,
-    max_tokens: 4096,
-    system: systemPrompt,
-    messages: [
-      {
-        role: "user",
-        content: userMessage,
-      },
-    ],
-  });
+  const response = await client.messages.create(
+    {
+      model,
+      max_tokens: 4096,
+      system: systemPrompt,
+      messages: [
+        {
+          role: "user",
+          content: userMessage,
+        },
+      ],
+    },
+    { timeout: 55_000 }
+  );
 
   if (response.content.length === 0) {
     throw new Error("Empty response from Claude");
