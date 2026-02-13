@@ -1,0 +1,33 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# build
+.next/
+out/
+build/
+
+# env
+.env
+.env*.local
+
+# debug
+npm-debug.log*
+
+# OS
+.DS_Store
+
+# editor
+*.swp
+*.swo
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# misc
+meme_chain_analyzer.db

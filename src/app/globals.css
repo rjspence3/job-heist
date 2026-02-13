@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-black: #0A0A0A;
+  --color-charcoal: #1A1A2E;
+  --color-navy: #16213E;
+  --color-steel: #0F3460;
+  --color-accent: #E94560;
+  --color-gold: #C9A227;
+  --color-smoke: #2C2C3E;
+  --color-fog: #3D3D56;
+  --color-light: #E8E8E8;
+  --color-muted: #9A9AB0;
+}
+
+@layer base {
+  body {
+    @apply bg-charcoal text-light font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
