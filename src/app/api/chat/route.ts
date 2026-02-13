@@ -50,7 +50,7 @@ export async function POST(request: Request) {
     }));
 
     const systemPrompt = getInterviewSystemPrompt();
-    const rawReply = await sendMessage(systemPrompt, truncatedMessages, 512);
+    const rawReply = await sendMessage(systemPrompt, truncatedMessages, 2048);
 
     const { cleanReply, interviewComplete, extractedData } =
       parseInterviewResponse(rawReply);
