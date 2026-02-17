@@ -111,7 +111,7 @@ describe("codec", () => {
         version: 1,
         data: {
           ...mockInterviewData,
-          uniqueContext: "x".repeat(10000),
+          uniqueContext: "x".repeat(40000),
         },
         report: mockReport,
       };

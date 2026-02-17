@@ -101,7 +101,71 @@ The JSON MUST match this exact structure with these exact field names. Do NOT ad
 export function getReportSystemPrompt(interviewData: InterviewData): string {
   return `You are a report generation engine. You will receive structured interview data about a person's job and must generate a complete HeistReport JSON object.
 
-Return ONLY a valid JSON object matching the HeistReport schema. No markdown, no code fences, no explanation — just the JSON object.
+Return ONLY a valid JSON object with this EXACT structure. No markdown, no code fences, no explanation — just the JSON object.
+
+## Required JSON Structure
+
+{
+  "targetProfile": {
+    "codename": "string — heist codename specific to this person's job",
+    "summary": "string — intelligence dossier summary",
+    "vulnerabilities": ["string — job aspects vulnerable to AI"],
+    "assets": ["string — human advantages AI can't replicate"]
+  },
+  "heistPlan": [
+    {
+      "phase": 1,
+      "title": "string — phase title",
+      "description": "string — what the AI crew does in this phase",
+      "aiTool": "string — specific AI tool or capability",
+      "timeToReplace": "string — e.g. '6 months', '2 years'",
+      "difficulty": "trivial | moderate | hard | impossible"
+    }
+  ],
+  "threatLevel": {
+    "overallScore": 0,
+    "breakdown": [
+      {
+        "category": "data_entry | communication | analysis | creative | relationship | physical | decision_making",
+        "label": "string — human-readable category label",
+        "percentage": 0,
+        "hoursAtRisk": 0,
+        "rationale": "string — why this percentage"
+      }
+    ],
+    "verdict": "string — overall assessment referencing something specific from the interview"
+  },
+  "cantSteal": {
+    "headline": "string — section headline",
+    "items": [
+      {
+        "title": "string — what AI can't steal",
+        "description": "string — why this is uniquely human"
+      }
+    ],
+    "closingLine": "string — closing remark"
+  },
+  "serious": {
+    "leverageScore": 0,
+    "opportunities": [
+      {
+        "area": "string — opportunity area",
+        "action": "string — specific action to take",
+        "impact": "high | medium | low",
+        "effort": "high | medium | low"
+      }
+    ],
+    "priorityMatrix": [
+      {
+        "action": "string — specific action",
+        "quadrant": "quick_win | strategic | fill_in | deprioritize"
+      }
+    ],
+    "executiveSummary": "string — professional summary of AI leverage opportunities"
+  }
+}
+
+The JSON MUST match this exact structure with these exact field names and enum values. Do NOT add extra fields or rename fields.
 
 ## Scoring Rubric (MANDATORY)
 
@@ -130,7 +194,11 @@ The serious.leverageScore = 100 - overallScore.
 - cantSteal items should be genuinely thoughtful, not generic
 - Codename must be specific to THIS person's job
 - Verdict should reference something specific from the interview
-- Serious mode opportunities should be actionable`;
+- Serious mode opportunities should be actionable
+- difficulty must be exactly one of: trivial, moderate, hard, impossible
+- category must be exactly one of: data_entry, communication, analysis, creative, relationship, physical, decision_making
+- impact and effort must be exactly one of: high, medium, low
+- quadrant must be exactly one of: quick_win, strategic, fill_in, deprioritize`;
 }
 
 export function getReportUserMessage(interviewData: InterviewData): string {

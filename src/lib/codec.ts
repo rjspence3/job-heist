@@ -1,7 +1,7 @@
 import type { EncodedReportPayload } from "./types";
 import { encodedReportPayloadSchema } from "./schemas";
 
-const MAX_PAYLOAD_SIZE = 8192;
+const MAX_PAYLOAD_SIZE = 32768;
 
 export function encodePayload(payload: EncodedReportPayload): string {
   const json = JSON.stringify(payload);

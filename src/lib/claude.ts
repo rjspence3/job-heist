@@ -22,7 +22,7 @@ export function getModel(): string {
 }
 
 export function getReportModel(): string {
-  return process.env.CLAUDE_REPORT_MODEL || "claude-haiku-4-5-20251001";
+  return process.env.CLAUDE_REPORT_MODEL || "claude-sonnet-4-5-20250929";
 }
 
 export async function sendMessage(
@@ -64,7 +64,7 @@ export async function generateReport(
   const response = await client.messages.create(
     {
       model,
-      max_tokens: 3000,
+      max_tokens: 8192,
       system: systemPrompt,
       messages: [
         {
@@ -73,11 +73,15 @@ export async function generateReport(
         },
       ],
     },
-    { timeout: 55_000 }
+    { timeout: 240_000 }
   );
 
   if (response.content.length === 0) {
     throw new Error("Empty response from Claude");
+  }
+
+  if (response.stop_reason === "max_tokens") {
+    console.error("Report generation hit max_tokens limit — output was truncated");
   }
 
   const firstBlock = response.content[0];
@@ -85,10 +89,32 @@ export async function generateReport(
     throw new Error("Unexpected response format");
   }
 
+  let jsonText = firstBlock.text.trim();
+  if (jsonText.startsWith("```")) {
+    const firstNewline = jsonText.indexOf("\n");
+    if (firstNewline !== -1) {
+      jsonText = jsonText.slice(firstNewline + 1);
+    }
+  }
+  if (jsonText.endsWith("```")) {
+    jsonText = jsonText.slice(0, jsonText.lastIndexOf("```"));
+  }
+  jsonText = jsonText.trim();
+
+  let parsed: unknown;
   try {
-    const report = heistReportSchema.parse(JSON.parse(firstBlock.text));
-    return report;
+    parsed = JSON.parse(jsonText);
   } catch {
+    console.error("Report response is not valid JSON:", jsonText.slice(0, 500));
     throw new Error("Failed to parse report JSON");
   }
+
+  const result = heistReportSchema.safeParse(parsed);
+  if (!result.success) {
+    console.error("Report schema validation failed:", result.error.issues);
+    console.error("Report keys received:", Object.keys(parsed as Record<string, unknown>));
+    throw new Error("Failed to parse report JSON");
+  }
+
+  return result.data;
 }
