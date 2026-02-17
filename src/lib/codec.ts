@@ -10,7 +10,11 @@ export function encodePayload(payload: EncodedReportPayload): string {
     throw new Error("Payload exceeds maximum size");
   }
 
-  return Buffer.from(json, "utf-8").toString("base64url");
+  return Buffer.from(json, "utf-8")
+    .toString("base64")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=/g, "");
 }
 
 export function decodePayload(encoded: string): EncodedReportPayload {
@@ -20,7 +24,9 @@ export function decodePayload(encoded: string): EncodedReportPayload {
 
   let json: string;
   try {
-    json = Buffer.from(encoded, "base64url").toString("utf-8");
+    const base64 = encoded.replace(/-/g, "+").replace(/_/g, "/");
+    const padded = base64 + "=".repeat((4 - (base64.length % 4)) % 4);
+    json = Buffer.from(padded, "base64").toString("utf-8");
   } catch {
     throw new Error("Invalid report data");
   }

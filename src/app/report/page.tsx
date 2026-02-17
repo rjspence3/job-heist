@@ -8,7 +8,8 @@ import { decodePayload } from "@/lib/codec";
 
 function ReportContent() {
   const searchParams = useSearchParams();
-  const encoded = searchParams.get("d");
+  const encoded =
+    searchParams.get("d") ?? sessionStorage.getItem("reportPayload");
 
   if (!encoded) {
     return (

@@ -20,7 +20,8 @@ export default function Home() {
     };
 
     const encoded = encodePayload(payload);
-    router.push(`/report?d=${encoded}`);
+    sessionStorage.setItem("reportPayload", encoded);
+    router.push("/report");
   };
 
   return (
