@@ -21,6 +21,26 @@
   }
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fillBar {
+  from {
+    width: 0%;
+  }
+  to {
+    width: var(--bar-width);
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -28,5 +48,35 @@
 
   .animate-pulse-slow {
     animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-reveal-1 {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out 0.2s forwards;
+  }
+
+  .animate-reveal-2 {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out 0.5s forwards;
+  }
+
+  .animate-reveal-3 {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out 0.8s forwards;
+  }
+
+  .animate-reveal-4 {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out 1.1s forwards;
+  }
+
+  .animate-reveal-5 {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out 1.4s forwards;
+  }
+
+  .animate-reveal-6 {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out 1.7s forwards;
   }
 }
