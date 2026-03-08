@@ -22,7 +22,7 @@ export function getModel(): string {
 }
 
 export function getReportModel(): string {
-  return process.env.CLAUDE_REPORT_MODEL || "claude-sonnet-4-5-20250929";
+  return process.env.CLAUDE_REPORT_MODEL || "claude-haiku-4-5-20251001";
 }
 
 export async function sendMessage(
