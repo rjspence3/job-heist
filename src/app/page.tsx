@@ -43,7 +43,16 @@ export default function Home() {
 
       <footer className="border-t border-fog px-6 py-3">
         <div className="max-w-4xl mx-auto flex items-center justify-between text-xs text-muted">
-          <span>Parody powered by AI (Claude by Anthropic). Not career advice.</span>
+          <span>
+            Job Heist &middot; Built by{" "}
+            <a href="https://nomouthlabs.com" className="underline hover:text-light transition-colors">
+              Rob Spencer
+            </a>
+            {" "}&middot;{" "}
+            <a href="https://nomouthlabs.com" className="underline hover:text-light transition-colors">
+              nomouthlabs.com
+            </a>
+          </span>
           <div className="flex gap-4">
             <Link href="/privacy" className="hover:text-light transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-light transition-colors">Terms</Link>

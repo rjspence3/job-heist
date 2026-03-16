@@ -37,6 +37,24 @@ function ReportContent() {
     return (
       <div className="flex flex-col min-h-screen">
         <ReportView interviewData={payload.data} report={payload.report} />
+
+        {/* Post-result CTA */}
+        <div className="bg-smoke border-t border-fog px-6 py-12">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-xl font-mono text-gold mb-3">Like what you see?</h2>
+            <p className="text-muted text-sm leading-relaxed mb-6">
+              This is one of several AI tools I&apos;ve built and actually use. If you&apos;re curious about
+              the rest — or want to talk shop — check out my full portfolio.
+            </p>
+            <a
+              href="https://nomouthlabs.com"
+              className="inline-block px-6 py-3 bg-accent text-light rounded-lg hover:bg-opacity-90 transition-all font-mono text-sm"
+            >
+              See my other tools →
+            </a>
+          </div>
+        </div>
+
         <div className="bg-charcoal border-t border-fog px-6 py-4">
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-xs text-muted mb-2">
