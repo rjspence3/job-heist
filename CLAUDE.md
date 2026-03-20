@@ -2,30 +2,6 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-<!-- BEGIN AUTO-GENERATED -->
-<!-- Regenerate: python3 ~/Development/dev/tools/generate_claude_md.py --apply -->
-
-Job Heist
-
-Next.js + React + TypeScript project.
-
-## Environment Setup
-
-```bash
-# Install Node dependencies
-npm install
-```
-
-## Local Access
-
-| Service | Domain | Port |
-|---------|--------|------|
-| Frontend | http://jobheist.test | 3003 |
-
-Port assignments defined in `~/Development/dev/ports.json`.
-
-<!-- END AUTO-GENERATED -->
-
 ## Product Context
 
 AI Job Heist Planner — a comedic AI tool that interviews users about their job, then generates a personalized "Heist Plan" showing how AI would replace them. Comedy is the Trojan horse for a genuine AI opportunity audit.
