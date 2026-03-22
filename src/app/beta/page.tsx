@@ -37,6 +37,17 @@ export default function BetaGate() {
   return (
     <div className="min-h-screen bg-heist-black flex items-center justify-center p-4">
       <div className="max-w-md w-full">
+        <div className="flex justify-center mb-6">
+          <Link
+            href="/"
+            aria-label="noMouthLabs — go home"
+            className="relative inline-flex items-center justify-center w-9 h-9 bg-black overflow-hidden"
+          >
+            <span className="font-mono text-light text-sm font-bold z-10">NM</span>
+            <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-accent" />
+          </Link>
+        </div>
+
         <div className="text-center mb-8">
           <h1 className="text-4xl font-mono text-heist-gold mb-3">
             AI JOB HEIST PLANNER

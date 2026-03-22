@@ -27,13 +27,23 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-charcoal flex flex-col">
       <header className="bg-smoke border-b border-fog p-6">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-mono text-gold mb-2">
-            AI JOB HEIST PLANNER
-          </h1>
-          <p className="text-muted text-sm">
-            Interview in progress. Answer honestly — the vault is already being cased.
-          </p>
+        <div className="max-w-4xl mx-auto flex items-start gap-4">
+          <Link
+            href="/"
+            aria-label="noMouthLabs — go home"
+            className="relative inline-flex items-center justify-center w-9 h-9 bg-black overflow-hidden flex-shrink-0 mt-1"
+          >
+            <span className="font-mono text-light text-sm font-bold z-10">NM</span>
+            <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-accent" />
+          </Link>
+          <div>
+            <h1 className="text-3xl font-mono text-gold mb-2">
+              AI JOB HEIST PLANNER
+            </h1>
+            <p className="text-muted text-sm">
+              Interview in progress. Answer honestly — the vault is already being cased.
+            </p>
+          </div>
         </div>
       </header>
 

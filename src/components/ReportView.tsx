@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import TargetProfile from "./TargetProfile";
 import HeistPlan from "./HeistPlan";
 import ThreatLevel from "./ThreatLevel";
@@ -24,13 +25,23 @@ export default function ReportView({
     <div className="min-h-screen bg-charcoal">
       <div className="max-w-4xl mx-auto px-4 py-8">
         <header className="mb-8 flex justify-between items-start animate-reveal-1">
-          <div>
-            <h1 className="text-4xl font-mono text-gold mb-2">
-              {seriousMode ? "AI LEVERAGE REPORT" : "HEIST PLAN"}
-            </h1>
-            <p className="text-muted text-sm font-mono">
-              {seriousMode ? "Strategic Analysis" : "Intelligence Briefing"}
-            </p>
+          <div className="flex items-start gap-4">
+            <Link
+              href="/"
+              aria-label="noMouthLabs — go home"
+              className="relative inline-flex items-center justify-center w-9 h-9 bg-black overflow-hidden flex-shrink-0 mt-1"
+            >
+              <span className="font-mono text-light text-sm font-bold z-10">NM</span>
+              <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-accent" />
+            </Link>
+            <div>
+              <h1 className="text-4xl font-mono text-gold mb-2">
+                {seriousMode ? "AI LEVERAGE REPORT" : "HEIST PLAN"}
+              </h1>
+              <p className="text-muted text-sm font-mono">
+                {seriousMode ? "Strategic Analysis" : "Intelligence Briefing"}
+              </p>
+            </div>
           </div>
           <div className="flex items-center gap-4">
             <SeriousModeToggle
