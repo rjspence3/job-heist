@@ -32,3 +32,7 @@ next-env.d.ts
 
 # misc
 meme_chain_analyzer.db
+
+# Kernel internal files
+.claude/
+HANDOFF-*.md
