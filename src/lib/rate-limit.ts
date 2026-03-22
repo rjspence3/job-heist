@@ -11,6 +11,13 @@ type RateLimitResult =
   | { allowed: true }
   | { allowed: false; retryAfterMs: number };
 
+// LIMITATION: This in-memory store is NOT shared across serverless function instances.
+// On Vercel, each invocation may run in a different process, so a user can bypass
+// this rate limit by being routed to separate instances. For a production deployment
+// with real abuse protection, replace this store with Upstash Redis:
+//   npm install @upstash/ratelimit @upstash/redis
+//   Vercel Marketplace auto-provisions UPSTASH_REDIS_REST_URL/TOKEN.
+// For a demo, this still limits single-instance throughput (e.g., local dev, Docker).
 const store = new Map<string, RateLimitEntry>();
 
 const CLEANUP_INTERVAL_MS = 5 * 60 * 1000;

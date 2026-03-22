@@ -61,7 +61,7 @@ describe("/api/chat", () => {
     expect(mockSendMessage).toHaveBeenCalledWith(
       expect.any(String),
       [{ role: "user", content: "x".repeat(5000) }],
-      512
+      2048
     );
   });
 

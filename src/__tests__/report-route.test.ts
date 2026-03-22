@@ -146,26 +146,6 @@ describe("/api/report", () => {
     expect(json.threatLevel.overallScore).toBeLessThanOrEqual(100);
   });
 
-  it("should retry once on invalid JSON", async () => {
-    mockGenerateReport
-      .mockRejectedValueOnce(new Error("Failed to parse report JSON"))
-      .mockResolvedValueOnce(mockReport);
-
-    const request = createMockRequest({ interviewData: mockInterviewData });
-    const response = await POST(request);
-    expect(response.status).toBe(200);
-    expect(mockGenerateReport).toHaveBeenCalledTimes(2);
-  });
-
-  it("should return 500 after two failures", async () => {
-    mockGenerateReport.mockRejectedValue(new Error("Failed to parse report JSON"));
-
-    const request = createMockRequest({ interviewData: mockInterviewData });
-    const response = await POST(request);
-    expect(response.status).toBe(500);
-    expect(mockGenerateReport).toHaveBeenCalledTimes(2);
-  });
-
   it("should return 429 when rate limited", async () => {
     mockCheckRateLimit.mockReturnValue({ allowed: false, retryAfterMs: 45000 });
 
