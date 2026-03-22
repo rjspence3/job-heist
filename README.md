@@ -13,9 +13,18 @@ An AI-powered career vulnerability analyzer built with Next.js and Claude. You c
 ## Tech stack
 
 - **Next.js 15** (App Router, standalone output)
-- **Anthropic Claude** via `@anthropic-ai/sdk` — both interview chat and report generation
+- **Anthropic Claude** via `@anthropic-ai/sdk` — Haiku for the interview (low latency), Sonnet for report generation (higher quality structured output)
 - **Zod** — runtime validation on all API inputs and Claude outputs
 - **TypeScript**, Tailwind CSS
+
+## Architecture
+
+Two separate Claude model calls handle the two phases:
+
+- **Chat** (`/api/chat`) — Uses Claude Haiku for fast, conversational responses during the interview. Rate-limited to 20 requests/minute per IP. The route detects when the interview is complete and embeds structured interview data in a sentinel-delimited block in the final message.
+- **Report** (`/api/report`) — Uses Claude Sonnet to generate the full heist briefing from the completed interview transcript. Output is validated against a Zod schema and encoded into a shareable URL parameter — no database or storage layer required.
+- **Health** (`/api/health`) — Returns `{ status: "ok" }`. Used by the Docker health check.
+- **Beta** (`/api/beta`) — Optional beta gate. Validates a code and sets a signed HMAC cookie.
 
 ## Running locally
 
@@ -48,6 +57,8 @@ Open [http://localhost:3000](http://localhost:3000).
 ```bash
 npm test
 ```
+
+63 tests across 8 test files covering API routes, Claude client, schemas, rate limiter, scoring, and URL encoding.
 
 ## Docker
 
