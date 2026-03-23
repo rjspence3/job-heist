@@ -56,7 +56,7 @@ export default function Home() {
           <span>
             Job Heist &middot; Built by{" "}
             <a href="https://nomouthlabs.com" className="underline hover:text-light transition-colors">
-              Rob Spencer
+              Rob Spence
             </a>
             {" "}&middot;{" "}
             <a href="https://nomouthlabs.com" className="underline hover:text-light transition-colors">
