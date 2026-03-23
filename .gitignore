@@ -35,4 +35,7 @@ meme_chain_analyzer.db
 
 # Kernel internal files
 .claude/
+CLAUDE.md
+.claudeignore
+AUDIT_*.md
 HANDOFF-*.md
