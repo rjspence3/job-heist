@@ -136,7 +136,7 @@ export default function TermsOfService() {
             <h2 className="text-lg font-mono text-gold mb-3">Contact</h2>
             <p>
               Questions about these terms? Contact us at:{" "}
-              <span className="text-gold">[your-email@example.com]</span>
+              <span className="text-gold">rob@nomouthlabs.com</span>
             </p>
           </section>
         </div>

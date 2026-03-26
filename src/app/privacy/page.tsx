@@ -122,7 +122,7 @@ export default function PrivacyPolicy() {
             <h2 className="text-lg font-mono text-gold mb-3">Contact</h2>
             <p>
               For privacy-related questions or requests, contact us at:{" "}
-              <span className="text-gold">[your-email@example.com]</span>
+              <span className="text-gold">rob@nomouthlabs.com</span>
             </p>
           </section>
         </div>
