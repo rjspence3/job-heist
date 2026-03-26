@@ -46,7 +46,7 @@ describe("prompts", () => {
 
     it("should contain opening message", () => {
       expect(prompt).toContain("*adjusts blueprints*");
-      expect(prompt).toContain("what do you do for a living");
+      expect(prompt).toContain("Either way, we end up in the same place");
     });
 
     it("should contain interview structure guidance", () => {
